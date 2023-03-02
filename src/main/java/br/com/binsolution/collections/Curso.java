@@ -1,9 +1,6 @@
 package br.com.binsolution.collections;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 public class Curso {
 
@@ -11,13 +8,14 @@ public class Curso {
     private String instrutor;
     //    private List<Aula> aulas = new LinkedList<>();
     private List<Aula> aulas = new ArrayList<Aula>();
+    private Set<Aluno> alunos = new HashSet<>();
+//    private Set<Aluno> alunos = new LinkedHashSet<>();
+//    private Set<Aluno> alunos = new TreeSet<>();
 
     /**
      * DIFERENÇA ENTRE ArrayList E LinkedList - Basicamente performance
      * ArrayList é mais rápida quando estática
      * LinkedList é mais rápida para alterar elementos
-     *
-     * @return
      */
 
     public String getNome() {
@@ -30,6 +28,10 @@ public class Curso {
 
     public List<Aula> getAulas() {
         return Collections.unmodifiableList(aulas);
+    }
+
+    public Set<Aluno> getAlunos() {
+        return Collections.unmodifiableSet(alunos);
     }
 
     public Curso(String nome, String instrutor) {
@@ -53,5 +55,13 @@ public class Curso {
                 ", tempoTotal='" + this.getTempoTotal() + '\'' +
                 ", aulas=" + aulas +
                 '}';
+    }
+
+    public void matricula(Aluno aluno) {
+        this.alunos.add(aluno);
+    }
+
+    public boolean estaMatriculado(Aluno aluno) {
+        return this.alunos.contains(aluno);
     }
 }
