@@ -9,8 +9,9 @@ public class Curso {
     //    private List<Aula> aulas = new LinkedList<>();
     private List<Aula> aulas = new ArrayList<Aula>();
     private Set<Aluno> alunos = new HashSet<>();
-//    private Set<Aluno> alunos = new LinkedHashSet<>();
+    //    private Set<Aluno> alunos = new LinkedHashSet<>();
 //    private Set<Aluno> alunos = new TreeSet<>();
+    private Map<Integer, Aluno> matriculaAluno = new HashMap<>();
 
     /**
      * DIFERENÇA ENTRE ArrayList E LinkedList - Basicamente performance
@@ -59,9 +60,17 @@ public class Curso {
 
     public void matricula(Aluno aluno) {
         this.alunos.add(aluno);
+        this.matriculaAluno.put(aluno.getNumeroMatricula(), aluno);
     }
 
     public boolean estaMatriculado(Aluno aluno) {
         return this.alunos.contains(aluno);
     }
+
+    public Aluno BuscaMatriculado(int matricula) {
+        if (!matriculaAluno.containsKey(matricula))
+            throw new NoSuchElementException("Aluno não encontrado - Matricula: " + matricula);
+        return matriculaAluno.get(matricula);
+    }
+
 }
